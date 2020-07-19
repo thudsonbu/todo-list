@@ -25,8 +25,14 @@ class TodoList extends Component{
             items: this.state.items.filter(item => item.id !== id)
         });
     }
-    editItem(id){
-
+    editItem(id, editedContent){
+        const editedItems = this.state.items.map(item => {
+            if(item.id === id){
+                return { ...item, content: editedContent }
+            }
+            return item;
+        });
+        this.setState({ items: editedItems });
     }
     render() {
         const items = this.state.items.map(item => (
@@ -35,6 +41,7 @@ class TodoList extends Component{
                 id = {item.id}
                 content = {item.content}
                 removeItem = {this.removeItem}
+                editItem = {this.editItem}
             />
         ));
         return (
