@@ -14,12 +14,13 @@ class TodoList extends Component{
         this.editItem = this.editItem.bind(this);
     }
     addItem(newItem){
+        console.log("Adding " + newItem.id);
         this.setState({
             items: [...this.state.items, newItem]
         });
     }
     removeItem(id) {
-        console.log("Trying to Remove" + id);
+        console.log("Removing " + id);
         this.setState({
             items: this.state.items.filter(item => item.id !== id)
         });
@@ -30,8 +31,10 @@ class TodoList extends Component{
     render() {
         const items = this.state.items.map(item => (
             <TodoItem 
+                key = {item.id}
+                id = {item.id}
                 content = {item.content}
-                removeItem = {() => this.removeItem(item.id)}
+                removeItem = {this.removeItem}
             />
         ));
         return (

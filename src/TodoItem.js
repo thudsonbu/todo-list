@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './TodoItem.css';
-import uuid from "uuid/dist/v4";
 
 class TodoItem extends Component {
     constructor(props) {
@@ -8,14 +7,19 @@ class TodoItem extends Component {
         this.handleRemove = this.handleRemove.bind(this);
     }
     handleRemove(evt){
-        this.props.removeItem(evt.target.id);
+        console.log(this.id);
+        this.props.removeItem(this.props.id);
     }
     render() {
         return (
-            <div className="TodoItem">
-                <p>{this.props.content}</p>
+            <div>
+                <li className="TodoItem">
+                    {this.props.content}
+                </li>
                 <button onClick={this.handleRemove}>Delete</button>
+                <button onClick={this.handleEdit}>Edit</button>
             </div>
+            
         )
     }
 }

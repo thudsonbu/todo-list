@@ -31,12 +31,13 @@ class NewItemForm extends Component{
                     <input 
                         type='text'
                         name='content'
+                        placeholder="New Todo"
                         value={this.state.content}
                         onChange={this.handleChange}
                         id='content'
                     />
                 </div>
-                <button>Add Potato</button>
+                <button>Add Todo</button>
             </form>
         )
     }
