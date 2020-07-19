@@ -18,7 +18,7 @@ class NewItemForm extends Component{
     }
     handleSubmit(evt) {
         evt.preventDefault();
-        const newItem  = { ...this.state, id: uuid() };
+        const newItem  = { ...this.state, id: uuid(), completed: false };
         this.props.addItem(newItem);
         this.setState({
             content: "",

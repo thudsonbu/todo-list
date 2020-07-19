@@ -12,6 +12,7 @@ class TodoItem extends Component {
         this.handleEdit = this.handleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
     }
     handleRemove(evt){
         console.log(this.id);
@@ -31,6 +32,9 @@ class TodoItem extends Component {
             [evt.target.name]: evt.target.value
         });
     }
+    handleToggle(evt){
+        this.props.toggleItem(this.props.id);
+    }
     render() {
         let display;
         if(this.state.editing){
@@ -49,7 +53,9 @@ class TodoItem extends Component {
         } else {
             display = (
                 <div>
-                    <li className="TodoItem">
+                    <li className={this.props.completed ? 'item-completed' : ""}
+                        onClick={this.handleToggle} 
+                    >
                         {this.props.content}
                     </li>
                     <button onClick={this.handleRemove}>Delete</button>

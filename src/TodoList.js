@@ -12,6 +12,7 @@ class TodoList extends Component{
         this.addItem = this.addItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.editItem = this.editItem.bind(this);
+        this.toggleCompletion = this.toggleCompletion.bind(this);
     }
     addItem(newItem){
         console.log("Adding " + newItem.id);
@@ -34,14 +35,25 @@ class TodoList extends Component{
         });
         this.setState({ items: editedItems });
     }
+    toggleCompletion(id){
+        const editedItems = this.state.items.map(item => {
+            if(item.id === id){
+                return { ...item, completed: !item.completed };
+            }
+            return item;
+        });
+        this.setState({ items: editedItems });
+    }
     render() {
         const items = this.state.items.map(item => (
             <TodoItem 
                 key = {item.id}
                 id = {item.id}
                 content = {item.content}
+                completed = {item.completed}
                 removeItem = {this.removeItem}
                 editItem = {this.editItem}
+                toggleItem = {this.toggleCompletion}
             />
         ));
         return (
