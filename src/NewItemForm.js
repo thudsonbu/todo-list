@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import uuid from "uuid/v4";
+import uuid from "uuid/dist/v4";
 import './NewItemForm.css';
 
 class NewItemForm extends Component{
