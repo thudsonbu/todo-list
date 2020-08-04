@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './TodoItem.css';
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class TodoItem extends Component {
     constructor(props) {
@@ -39,8 +40,8 @@ class TodoItem extends Component {
         let display;
         if(this.state.editing){
             display = (
-                <div>
-                    <form onSubmit={this.handleEdit}>
+                <CSSTransition key='editing' timeout={500} classNames='form'>
+                    <form className="Todo-edit-form" onSubmit={this.handleEdit}>
                         <input 
                             type="text"
                             value={this.state.content}
@@ -48,22 +49,37 @@ class TodoItem extends Component {
                             onChange={this.handleChange} />
                         <button>Save</button>
                     </form>
-                </div>
-            )
+                </CSSTransition>
+            );
         } else {
             display = (
-                <div>
-                    <li className={this.props.completed ? 'item-completed' : ""}
-                        onClick={this.handleToggle} 
-                    >
-                        {this.props.content}
-                    </li>
-                    <button onClick={this.handleRemove}>Delete</button>
-                    <button onClick={this.toggleEdit}>Edit</button>
-                </div>
-            )
+                <CSSTransition keys='normal' timeout={500} classNames="task-text">
+                    <div className="Todo">
+                        <li className={this.props.completed ? 'Todo-task completed' : "Todo-task"}
+                            onClick={this.handleToggle} 
+                        >
+                            {this.props.content}
+                        </li>
+                    </div>
+                </CSSTransition>
+            );
         }
-        return display;
+        return (
+            <TransitionGroup
+                className={this.props.completed ? "Todo completed" : "Todo"}
+            >
+                {display}
+                <div className='Todo-buttons'>
+                    <button onClick={this.toggleEdit}>
+                        <i class='fas fa-pen' />
+                    </button>
+                    <button onClick={this.handleRemove}>
+                        <i class='fas fa-trash'/>
+                    </button>
+                </div>
+            </TransitionGroup>
+
+        )
     }
 }
 

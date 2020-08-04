@@ -57,10 +57,12 @@ class TodoList extends Component{
             />
         ));
         return (
-            <div>
+            <div className="TodoList">
                 <h1>To Do List</h1>
+                <ul>
+                    {items}
+                </ul>
                 <NewItemForm addItem={this.addItem}/>
-                {items}
             </div>
         )
     }
